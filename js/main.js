@@ -2,7 +2,7 @@
 const $ = document;
 
 // Productos
-const Productos = [
+const productos = [
     // Frutas
     {
         id: 1,
@@ -98,24 +98,38 @@ const Productos = [
     },
 ];
 
+// Renderizado de productos
 let listaProductos = $.getElementById("lista-productos");
 
-Productos.forEach((producto) => {
+productos.forEach((prod) => {
     let productoDiv = $.createElement("div");
     productoDiv.classList.add("card");
 
     let nombre = $.createElement("h3");
-    nombre.textContent = producto.nombre;
+    nombre.textContent = prod.nombre;
 
     let categoria = $.createElement("p");
-    categoria.textContent = `Categoría: ${producto.categoria}`;
+    categoria.textContent = `Categoría: ${prod.categoria}`;
 
     let precio = $.createElement("p");
-    precio.textContent = `Precio: $${producto.precio}`;
+    precio.textContent = `Precio: $${prod.precio}`;
 
     productoDiv.appendChild(nombre);
     productoDiv.appendChild(categoria);
     productoDiv.appendChild(precio);
 
     listaProductos.appendChild(productoDiv);
+});
+
+// Renderizar los botones de categorías
+let filtrosDiv = $.getElementById("filtros-categorias");
+const categorias = ["Todas", "Frutas", "Verduras", "Hongos"];
+
+categorias.forEach((cat) => {
+    let boton = $.createElement("button");
+    boton.textContent = cat;
+    boton.addEventListener("click", () => {
+        filtrarProductos(cat);
+    });
+    filtrosDiv.appendChild(boton);
 });
