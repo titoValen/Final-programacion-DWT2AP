@@ -21,8 +21,17 @@ a {
     color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
     list-style: none;
+}
+
+p,
+a,
+span,
+li,
+button {
+    font-family: "Nunito Sans", sans-serif;
 }
 
 img {
