@@ -4,12 +4,19 @@ header {
     padding: 0.75rem 0;
 }
 
+main {
+    background-image: url('../img/background-mesa.webp');
+    background-position: center;
+}
+
 section {
-    background: #e9e7e7;
+    background-image: url('../img/background-mantel.webp');
+    background-position: center;
     max-width: 1750px;
     margin: 1rem auto;
     padding: 1.25rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
+    color: #e5e5e5;
 }
 
 section h2 {
@@ -29,25 +36,79 @@ section h2 {
 }
 
 #filtros-categorias button {
-    border: 1px solid black;
+    background: #8e8d8d;
+    color: #e5e5e5;
     padding: 1rem 2.75rem;
     border-radius: 1rem;
-    font-size: 1rem;
+    font-size: 1.15rem;
     transition: all .3s;
 }
 
 #filtros-categorias button:hover {
     background: #4CAF50;
-    border: 1px solid #4CAF50;
 }
 
 #lista-productos {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    row-gap: 1rem;
+    row-gap: 2rem;
 }
 
 #lista-productos .card {
     min-width: 300px;
+    max-width: 350px;
+    background: #8e8d8d;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#lista-productos .card h3 {
+    text-align: center;
+}
+
+#lista-productos .card img {
+    width: 100%;
+    border-radius: .5rem;
+}
+
+#lista-productos .card .contenido {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem 1rem 1rem;
+}
+
+#lista-productos .card .conteiner-btn {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
+#lista-productos .card button {
+    width: 50%;
+    border: none;
+    color: #121212;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+#lista-productos .card .btn-añadir-carrito {
+    background: #4CAF50;
+}
+
+#lista-productos .card .btn-añadir-carrito:hover {
+    background: #45a049;
+}
+
+#lista-productos .card .btn-ver-mas {
+    background: #008CBA;
+}
+
+#lista-productos .card .btn-ver-mas:hover {
+    background: #007bb5;
 }
