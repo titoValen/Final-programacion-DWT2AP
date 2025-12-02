@@ -114,78 +114,78 @@ const productos = [
 ];
 
 // Renderizado de productos
-let listaProductos = $.getElementById("lista-productos");
+let ListaProductos = $.getElementById("lista-productos");
 
-productos.forEach((prod) => {
-    let productoDiv = $.createElement("div");
-    productoDiv.classList.add("card");
+productos.forEach((Prod) => {
+    let ProductoDiv = $.createElement("div");
+    ProductoDiv.classList.add("card");
 
     // Crear imagenes
-    let imagen = $.createElement("img");
-    imagen.src = `img/producto/${prod.imagen}`;
-    imagen.alt = prod.nombre;
+    let Imagen = $.createElement("img");
+    Imagen.src = `img/producto/${Prod.imagen}`;
+    Imagen.alt = Prod.nombre;
 
     // Crear nombre
-    let nombre = $.createElement("h3");
-    nombre.textContent = prod.nombre;
+    let Nombre = $.createElement("h3");
+    Nombre.textContent = Prod.nombre;
 
     // Crear contenido
-    let contenido = $.createElement("div");
-    contenido.classList.add("contenido");
+    let Contenido = $.createElement("div");
+    Contenido.classList.add("contenido");
 
-    let categoria = $.createElement("p");
-    categoria.textContent = `Categoría: ${prod.categoria}`;
+    let Categoria = $.createElement("p");
+    Categoria.textContent = `Categoría: ${Prod.categoria}`;
 
-    let precio = $.createElement("p");
-    precio.textContent = `Precio: $${prod.precio}`;
+    let Precio = $.createElement("p");
+    Precio.textContent = `Precio: $${Prod.precio}`;
 
-    contenido.appendChild(categoria);
-    contenido.appendChild(precio);
+    Contenido.appendChild(Categoria);
+    Contenido.appendChild(Precio);
 
     // Crear botón añadir al carrito
-    let conteinerBtn = $.createElement("div");
-    conteinerBtn.classList.add("conteiner-btn");
+    let ConteinerBtn = $.createElement("div");
+    ConteinerBtn.classList.add("conteiner-btn");
 
-    let botonAñadirCarrito = $.createElement("button");
-    botonAñadirCarrito.textContent = "Añadir carrito";
-    botonAñadirCarrito.classList.add("btn-añadir-carrito");
+    let BotonAñadirCarrito = $.createElement("button");
+    BotonAñadirCarrito.textContent = "Añadir carrito";
+    BotonAñadirCarrito.classList.add("btn-añadir-carrito");
 
-    conteinerBtn.appendChild(botonAñadirCarrito);
+    ConteinerBtn.appendChild(BotonAñadirCarrito);
 
     // Crear botón ver más
-    let botonVerMas = $.createElement("button");
-    botonVerMas.textContent = "Ver más";
-    botonVerMas.classList.add("btn-ver-mas");
+    let BotonVerMas = $.createElement("button");
+    BotonVerMas.textContent = "Ver más";
+    BotonVerMas.classList.add("btn-ver-mas");
 
-    conteinerBtn.appendChild(botonVerMas);
+    ConteinerBtn.appendChild(BotonVerMas);
 
     // Estructura del producto
-    productoDiv.appendChild(imagen);
-    productoDiv.appendChild(nombre);
-    productoDiv.appendChild(contenido);
-    productoDiv.appendChild(conteinerBtn);
+    ProductoDiv.appendChild(Imagen);
+    ProductoDiv.appendChild(Nombre);
+    ProductoDiv.appendChild(Contenido);
+    ProductoDiv.appendChild(ConteinerBtn);
 
-    listaProductos.appendChild(productoDiv);
+    ListaProductos.appendChild(ProductoDiv);
 });
 
 // Renderizar los botones de categorías
-let filtrosDiv = $.getElementById("filtros-categorias");
-const categorias = ["Todas", "Frutas", "Verduras", "Hongos"];
+let FiltrosDiv = $.getElementById("filtros-categorias");
+const Categorias = ["Todas", "Frutas", "Verduras", "Hongos"];
 
-categorias.forEach((cat) => {
-    let boton = $.createElement("button");
-    boton.textContent = cat;
-    boton.addEventListener("click", () => {
-        filtrarProductos(cat);
+Categorias.forEach((Cat) => {
+    let Boton = $.createElement("button");
+    Boton.textContent = Cat;
+    Boton.addEventListener("click", () => {
+        filtrarProductos(Cat);
     });
-    filtrosDiv.appendChild(boton);
+    FiltrosDiv.appendChild(Boton);
 });
 
 // Funcionamiento de filtrar
 const Cards = $.querySelectorAll(".card")
 
-function filtrarProductos(cat) {
-    if (cat == "Todas") {
+function filtrarProductos(Cat) {
+    if (Cat == "Todas") {
         for (i = 0; i < Cards.length; i++) {
             Cards[i].style.display = "block";
         }
@@ -193,13 +193,13 @@ function filtrarProductos(cat) {
     }
 
     for (i = 0; i < Cards.length; i++) {
-        let contenidoCard = Cards[i].textContent;
+        let ContenidoCard = Cards[i].textContent;
 
-        if (!contenidoCard.includes(cat)) {
+        if (!ContenidoCard.includes(Cat)) {
             Cards[i].style.display = "none";
         }
 
-        if (contenidoCard.includes(cat)) {
+        if (ContenidoCard.includes(Cat)) {
             Cards[i].style.display = "block";
         }
     }
@@ -209,12 +209,12 @@ function filtrarProductos(cat) {
 const Carrito = [];
 const TotalBtnAñadir = $.querySelectorAll(".btn-añadir-carrito");
 
-TotalBtnAñadir.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-        const PadreCard = e.target.parentElement.parentElement;
+TotalBtnAñadir.forEach((Btn) => {
+    Btn.addEventListener('click', (E) => {
+        const PadreCard = E.target.parentElement.parentElement;
         const NombreCard = PadreCard.querySelector("h3").textContent;
-        const productoCard = productos.find((p) => p.nombre === NombreCard);
+        const ProductoCard = productos.find((P) => P.nombre === NombreCard);
 
-        Carrito.push(productoCard);
+        Carrito.push(ProductoCard);
     })
 })
