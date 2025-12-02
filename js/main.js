@@ -204,3 +204,17 @@ function filtrarProductos(cat) {
         }
     }
 }
+
+// Carrito
+const Carrito = [];
+const TotalBtnAñadir = $.querySelectorAll(".btn-añadir-carrito");
+
+TotalBtnAñadir.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        const PadreCard = e.target.parentElement.parentElement;
+        const NombreCard = PadreCard.querySelector("h3").textContent;
+        const productoCard = productos.find((p) => p.nombre === NombreCard);
+
+        Carrito.push(productoCard);
+    })
+})
