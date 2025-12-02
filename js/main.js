@@ -119,7 +119,7 @@ let listaProductos = $.getElementById("lista-productos");
 productos.forEach((prod) => {
     let productoDiv = $.createElement("div");
     productoDiv.classList.add("card");
-    
+
     // Crear imagenes
     let imagen = $.createElement("img");
     imagen.src = `img/producto/${prod.imagen}`;
@@ -128,17 +128,17 @@ productos.forEach((prod) => {
     // Crear nombre
     let nombre = $.createElement("h3");
     nombre.textContent = prod.nombre;
-    
+
     // Crear contenido
     let contenido = $.createElement("div");
     contenido.classList.add("contenido");
 
     let categoria = $.createElement("p");
     categoria.textContent = `Categoría: ${prod.categoria}`;
-    
+
     let precio = $.createElement("p");
     precio.textContent = `Precio: $${prod.precio}`;
-    
+
     contenido.appendChild(categoria);
     contenido.appendChild(precio);
 
@@ -151,7 +151,7 @@ productos.forEach((prod) => {
     botonAñadirCarrito.classList.add("btn-añadir-carrito");
 
     conteinerBtn.appendChild(botonAñadirCarrito);
-    
+
     // Crear botón ver más
     let botonVerMas = $.createElement("button");
     botonVerMas.textContent = "Ver más";
@@ -180,3 +180,27 @@ categorias.forEach((cat) => {
     });
     filtrosDiv.appendChild(boton);
 });
+
+// Funcionamiento de filtrar
+const Cards = $.querySelectorAll(".card")
+
+function filtrarProductos(cat) {
+    if (cat == "Todas") {
+        for (i = 0; i < Cards.length; i++) {
+            Cards[i].style.display = "block";
+        }
+        return;
+    }
+
+    for (i = 0; i < Cards.length; i++) {
+        let contenidoCard = Cards[i].textContent;
+
+        if (!contenidoCard.includes(cat)) {
+            Cards[i].style.display = "none";
+        }
+
+        if (contenidoCard.includes(cat)) {
+            Cards[i].style.display = "block";
+        }
+    }
+}
