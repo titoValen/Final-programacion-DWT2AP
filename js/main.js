@@ -10,6 +10,7 @@ const productos = [
         imagen: "manzana.webp",
         categoria: "Frutas",
         precio: 100,
+        descripcion: "Manzana roja, fresca y crujiente.",
     },
     {
         id: 2,
@@ -17,6 +18,7 @@ const productos = [
         imagen: "banana.webp",
         categoria: "Frutas",
         precio: 80,
+        descripcion: "Bananas dulces, ideales para colaciones.",
     },
     {
         id: 3,
@@ -24,6 +26,7 @@ const productos = [
         imagen: "naranja.webp",
         categoria: "Frutas",
         precio: 90,
+        descripcion: "Naranja jugosa, rica en vitamina C.",
     },
     {
         id: 4,
@@ -31,6 +34,7 @@ const productos = [
         imagen: "pera.webp",
         categoria: "Frutas",
         precio: 110,
+        descripcion: "Pera tierna, de sabor suave y dulce.",
     },
     {
         id: 5,
@@ -38,6 +42,7 @@ const productos = [
         imagen: "uva.webp",
         categoria: "Frutas",
         precio: 120,
+        descripcion: "Uvas frescas, listas para consumir.",
     },
     // Verduras
     {
@@ -46,6 +51,7 @@ const productos = [
         imagen: "lechuga.webp",
         categoria: "Verduras",
         precio: 70,
+        descripcion: "Lechuga fresca, ideal para ensaladas.",
     },
     {
         id: 7,
@@ -53,6 +59,7 @@ const productos = [
         imagen: "tomate.webp",
         categoria: "Verduras",
         precio: 95,
+        descripcion: "Tomates rojos, jugosos y sabrosos.",
     },
     {
         id: 8,
@@ -60,6 +67,7 @@ const productos = [
         imagen: "zanahoria.webp",
         categoria: "Verduras",
         precio: 60,
+        descripcion: "Zanahorias crocantes, listas para cocinar.",
     },
     {
         id: 9,
@@ -67,6 +75,7 @@ const productos = [
         imagen: "cebolla.webp",
         categoria: "Verduras",
         precio: 50,
+        descripcion: "Cebollas frescas, de sabor intenso.",
     },
     {
         id: 10,
@@ -74,6 +83,7 @@ const productos = [
         imagen: "morron.webp",
         categoria: "Verduras",
         precio: 85,
+        descripcion: "Morrón rojo, dulce y aromático.",
     },
     // Hongos
     {
@@ -82,6 +92,7 @@ const productos = [
         imagen: "champiñon.webp",
         categoria: "Hongos",
         precio: 130,
+        descripcion: "Champiñones blancos, suaves y versátiles.",
     },
     {
         id: 12,
@@ -89,6 +100,7 @@ const productos = [
         imagen: "portobello.webp",
         categoria: "Hongos",
         precio: 150,
+        descripcion: "Portobellos grandes, ideales para grillar.",
     },
     {
         id: 13,
@@ -96,6 +108,7 @@ const productos = [
         imagen: "shiitake.webp",
         categoria: "Hongos",
         precio: 170,
+        descripcion: "Hongos shiitake, de sabor intenso.",
     },
     {
         id: 14,
@@ -103,6 +116,7 @@ const productos = [
         imagen: "enoki.webp",
         categoria: "Hongos",
         precio: 140,
+        descripcion: "Enoki finos, perfectos para salteados.",
     },
     {
         id: 15,
@@ -110,6 +124,7 @@ const productos = [
         imagen: "ostra.webp",
         categoria: "Hongos",
         precio: 160,
+        descripcion: "Hongos ostra, carnosos y delicados.",
     },
 ];
 
@@ -167,6 +182,70 @@ productos.forEach((Prod) => {
 
     ListaProductos.appendChild(ProductoDiv);
 });
+
+// Crear modal dinámicamente
+function CreateModal(url, title, cat, pre, des) {
+    // Crear contenedor del modal
+    let ModalContainer = $.createElement("div");
+    ModalContainer.classList.add("modal-container");
+    ModalContainer.id = "modal_container";
+
+    // Crear modal
+    let Modal = $.createElement("div");
+    Modal.classList.add("modal");
+
+    // Crear contenido del modal
+    let Img = $.createElement("img");
+    Img.src = `img/producto/${url}`
+
+    let H4 = $.createElement("h4");
+    H4.textContent = title;
+
+    let SpanCategoria = $.createElement("span")
+    SpanCategoria.textContent = `Categoría: ${cat}`;
+
+    let SpanPrecio = $.createElement("span")
+    SpanPrecio.textContent = `Precio: $${pre}`;
+
+    let PDescripcion = $.createElement("p")
+    PDescripcion.textContent = des;
+
+    let Btn = $.createElement("button")
+    Btn.id = "close";
+    Btn.textContent = "Cerrar"
+
+    // Agregar evento al botón de cerrar
+    Btn.addEventListener('click', CloseModal);
+
+    // Estructura del modal
+    Modal.appendChild(Img)
+    Modal.appendChild(H4)
+    Modal.appendChild(SpanCategoria)
+    Modal.appendChild(SpanPrecio)
+    Modal.appendChild(PDescripcion)
+    Modal.appendChild(Btn)
+
+    ModalContainer.appendChild(Modal);
+    $.body.appendChild(ModalContainer);
+
+    // Activar animación después de agregar al DOM
+    setTimeout(() => {
+        ModalContainer.classList.add('show');
+    }, 30);
+}
+
+// Cerrar y eliminar modal
+function CloseModal() {
+    const ModalContainer = $.getElementById("modal_container");
+    if (ModalContainer) {
+        ModalContainer.classList.remove('show');
+        
+        // Esperar a que termine la animación antes de eliminar
+        setTimeout(() => {
+            ModalContainer.remove();
+        }, 300);
+    }
+}
 
 // Renderizar los botones de categorías
 let FiltrosDiv = $.getElementById("filtros-categorias");
@@ -238,6 +317,19 @@ function Toastr(producto) {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    
+
     toastr["info"](`Se añadió el producto ${producto.nombre} al carrito`, "Añadido carrito")
 }
+
+// Ver más
+const TotalBtnVerMas = $.querySelectorAll(".btn-ver-mas");
+
+TotalBtnVerMas.forEach((Btn) => {
+    Btn.addEventListener('click', (E) => {
+        const PadreCard = E.target.parentElement.parentElement;
+        const NombreCard = PadreCard.querySelector("h3").textContent;
+        const ProductoCard = productos.find((P) => P.nombre === NombreCard);
+
+        CreateModal(ProductoCard.imagen, ProductoCard.nombre, ProductoCard.categoria, ProductoCard.precio, ProductoCard.descripcion);
+    })
+})

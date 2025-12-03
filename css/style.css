@@ -140,3 +140,82 @@ section h2 {
 #lista-productos .card .btn-ver-mas:hover {
     background: #007bb5;
 }
+
+.modal-container {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    inset: 0;
+    display: flex;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s;
+}
+
+.modal-container.show {
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal {
+    width: 450px;
+    max-width: 100%;
+    background: #dadada;
+    height: fit-content;
+    padding: 24px;
+    margin: auto;
+    border-radius: 1rem;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: all .3s;
+}
+
+.modal-container.show .modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal img {
+    border-radius: .5rem;
+}
+
+.modal h4 {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.modal span {
+    display: inline-block;
+    width: 50%;
+}
+
+.modal span:nth-child(4) {
+    text-align: end;
+}
+
+.modal :is(span, p) {
+    font-size: 1.30rem;
+}
+
+.modal p {
+    text-align: center;
+}
+
+.modal button {
+    width: 100%;
+    background: #df1f1f;
+    padding: .5rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: .5rem;
+    color: #dfdfdf;
+    transition: all .3s;
+}
+
+.modal button:hover {
+    background: #b71717;
+}
