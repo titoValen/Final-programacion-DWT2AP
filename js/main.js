@@ -184,7 +184,7 @@ productos.forEach((Prod) => {
 });
 
 // Crear modal dinámicamente
-function CreateModal(url, title, cat, pre, des) {
+function CreateModalVerMas(url, title, cat, pre, des) {
     // Crear contenedor del modal
     let ModalContainer = $.createElement("div");
     ModalContainer.classList.add("modal-container");
@@ -239,7 +239,7 @@ function CloseModal() {
     const ModalContainer = $.getElementById("modal_container");
     if (ModalContainer) {
         ModalContainer.classList.remove('show');
-        
+
         // Esperar a que termine la animación antes de eliminar
         setTimeout(() => {
             ModalContainer.remove();
@@ -284,9 +284,10 @@ function filtrarProductos(Cat) {
     }
 }
 
-// Carrito
+// Añadir Carrito
 const Carrito = [];
 const TotalBtnAñadir = $.querySelectorAll(".btn-añadir-carrito");
+let ValorTotal = 0;
 
 TotalBtnAñadir.forEach((Btn) => {
     Btn.addEventListener('click', (E) => {
@@ -296,6 +297,9 @@ TotalBtnAñadir.forEach((Btn) => {
 
         Carrito.push(ProductoCard);
         Toastr(ProductoCard);
+
+        ValorTotal += ProductoCard.precio;
+        console.log(`Valor total del carrito: $${ValorTotal}`);
     })
 })
 
@@ -330,6 +334,62 @@ TotalBtnVerMas.forEach((Btn) => {
         const NombreCard = PadreCard.querySelector("h3").textContent;
         const ProductoCard = productos.find((P) => P.nombre === NombreCard);
 
-        CreateModal(ProductoCard.imagen, ProductoCard.nombre, ProductoCard.categoria, ProductoCard.precio, ProductoCard.descripcion);
+        CreateModalVerMas(ProductoCard.imagen, ProductoCard.nombre, ProductoCard.categoria, ProductoCard.precio, ProductoCard.descripcion);
     })
 })
+
+// Ver Carrito
+const VerCarritoBtn = $.getElementById("carrito");
+VerCarritoBtn.addEventListener('click', () => {
+    let ListaProductosCarrito = "";
+
+    if (Carrito.length === 0) {
+        console.log("El carrito está vacío.");
+        return;
+    }
+    CreateModalCarrito(Carrito, ValorTotal);
+});
+
+function CreateModalCarrito(carrito, total) {
+    // Crear contenedor del modal
+    let ModalContainer = $.createElement("div");
+    ModalContainer.classList.add("modal-container");
+    ModalContainer.id = "modal_container";
+
+    // Crear modal
+    let Modal = $.createElement("div");
+    Modal.classList.add("modal");
+
+    let H4 = $.createElement("h4");
+    H4.textContent = "Carrito de Compras";
+
+    let Ul = $.createElement("ul");
+    carrito.forEach((Prod) => {
+        let Li = $.createElement("li");
+        Li.textContent = `${Prod.nombre} - $${Prod.precio}`;
+        Ul.appendChild(Li);
+    });
+
+    let TotalP = $.createElement("p");
+    TotalP.textContent = `Total: $${total}`;
+
+    let Btn = $.createElement("button")
+    Btn.id = "close";
+    Btn.textContent = "Cerrar"
+    
+    // Agregar evento al botón de cerrar
+    Btn.addEventListener('click', CloseModal);
+
+    Modal.appendChild(H4);
+    Modal.appendChild(Ul);
+    Modal.appendChild(TotalP);
+    Modal.appendChild(Btn)
+
+    ModalContainer.appendChild(Modal);
+    $.body.appendChild(ModalContainer);
+
+    // Activar animación después de agregar al DOM
+    setTimeout(() => {
+        ModalContainer.classList.add('show');
+    }, 30);
+}
