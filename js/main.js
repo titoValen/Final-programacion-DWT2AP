@@ -296,7 +296,7 @@ TotalBtnAñadir.forEach((Btn) => {
         const ProductoCard = productos.find((P) => P.nombre === NombreCard);
 
         Carrito.push(ProductoCard);
-        Toastr(ProductoCard);
+        ToastrInfo(ProductoCard);
 
         ValorTotal += ProductoCard.precio;
         console.log(`Valor total del carrito: $${ValorTotal}`);
@@ -304,7 +304,7 @@ TotalBtnAñadir.forEach((Btn) => {
 })
 
 // Toastr.js
-function Toastr(producto) {
+function ToastrInfo(producto) {
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -325,6 +325,28 @@ function Toastr(producto) {
     toastr["info"](`Se añadió el producto ${producto.nombre} al carrito`, "Añadido carrito")
 }
 
+function ToastrWarning() {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    Command: toastr["warning"]("Para ver lo que agregaste en tu carrito tenes que agregar primero.", "Llenar carrito")
+}
+
 // Ver más
 const TotalBtnVerMas = $.querySelectorAll(".btn-ver-mas");
 
@@ -341,10 +363,8 @@ TotalBtnVerMas.forEach((Btn) => {
 // Ver Carrito
 const VerCarritoBtn = $.getElementById("carrito");
 VerCarritoBtn.addEventListener('click', () => {
-    let ListaProductosCarrito = "";
-
     if (Carrito.length === 0) {
-        console.log("El carrito está vacío.");
+        ToastrWarning();
         return;
     }
     CreateModalCarrito(Carrito, ValorTotal);
@@ -376,7 +396,7 @@ function CreateModalCarrito(carrito, total) {
     let Btn = $.createElement("button")
     Btn.id = "close";
     Btn.textContent = "Cerrar"
-    
+
     // Agregar evento al botón de cerrar
     Btn.addEventListener('click', CloseModal);
 
