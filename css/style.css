@@ -214,6 +214,15 @@ section h2 {
     transition: all .3s;
 }
 
+.modal button#close {
+    background: #008CBA;
+    width: 100%;
+}
+
+.modal button#close:hover {
+    background: #007bb5;
+}
+
 .modal button:hover {
     background: #b71717;
 }
