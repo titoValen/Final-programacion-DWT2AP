@@ -299,7 +299,6 @@ TotalBtnAñadir.forEach((Btn) => {
         ToastrInfo(ProductoCard);
 
         ValorTotal += ProductoCard.precio;
-        console.log(`Valor total del carrito: $${ValorTotal}`);
     })
 })
 
@@ -314,7 +313,7 @@ function ToastrInfo(producto) {
         "preventDuplicates": false,
         "showDuration": "300",
         "hideDuration": "1000",
-        "timeOut": "5000",
+        "timeOut": "2000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
@@ -336,7 +335,7 @@ function ToastrWarning() {
         "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
-        "timeOut": "2000",
+        "timeOut": "1500",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",
