@@ -482,7 +482,10 @@ function FormDatos() {
     let Form = $.createElement("form");
 
     let H4 = $.createElement("h4");
-    H4.textContent = "Datos de Usuario";
+    H4.textContent = "Ingresa tus datos";
+
+    let ContainerForm = $.createElement("div");
+    ContainerForm.classList.add("container-form");
 
     let LabelNombre = $.createElement("label");
     LabelNombre.textContent = "Nombre:";
@@ -491,19 +494,48 @@ function FormDatos() {
     InputNombre.name = "nombre";
     InputNombre.required = true;
 
-    let LabelApellido = $.createElement("label");
-    LabelApellido.textContent = "Apellido:";
-    let InputApellido = $.createElement("input");
-    InputApellido.type = "text";
-    InputApellido.name = "apellido";
-    InputApellido.required = true;
-
     let LabelEmail = $.createElement("label");
     LabelEmail.textContent = "Email:";
     let InputEmail = $.createElement("input");
     InputEmail.type = "email";
     InputEmail.name = "email";
     InputEmail.required = true;
+
+    let LabelTelefono = $.createElement("label");
+    LabelTelefono.textContent = "Teléfono:";
+    let InputTelefono = $.createElement("input");
+    InputTelefono.type = "tel";
+    InputTelefono.name = "telefono";
+    InputTelefono.required = true;
+
+    let LabelFechaEntrega = $.createElement("label");
+    LabelFechaEntrega.textContent = "Fecha de entrega:";
+    let InputFechaEntrega = $.createElement("input");
+    InputFechaEntrega.type = "date";
+    InputFechaEntrega.name = "fecha_entrega";
+    InputFechaEntrega.required = true;
+
+    let LabelMetodoPago = $.createElement("label");
+    LabelMetodoPago.textContent = "Método de pago:";
+    let SelectMetodoPago = $.createElement("select");
+    SelectMetodoPago.name = "metodo_pago";
+    SelectMetodoPago.required = true;
+
+    let OptionEfectivo = $.createElement("option");
+    OptionEfectivo.value = "efectivo";
+    OptionEfectivo.textContent = "Efectivo";
+
+    let OptionTarjeta = $.createElement("option");
+    OptionTarjeta.value = "tarjeta";
+    OptionTarjeta.textContent = "Tarjeta de crédito/débito";
+
+    let OptionMercadoPago = $.createElement("option");
+    OptionMercadoPago.value = "mercado_pago";
+    OptionMercadoPago.textContent = "Mercado Pago";
+
+    SelectMetodoPago.appendChild(OptionEfectivo);
+    SelectMetodoPago.appendChild(OptionTarjeta);
+    SelectMetodoPago.appendChild(OptionMercadoPago);
 
     let LabelDireccion = $.createElement("label");
     LabelDireccion.textContent = "Dirección:";
@@ -512,29 +544,41 @@ function FormDatos() {
     InputDireccion.name = "direccion";
     InputDireccion.required = true;
 
-    let BtnSiguiente = $.createElement("button");
-    BtnSiguiente.type = "submit";
-    BtnSiguiente.textContent = "Siguiente";
+    let ContainerBtns = $.createElement("div");
+    ContainerBtns.classList.add("container-btns");
 
     let BtnAtras = $.createElement("button");
+    BtnAtras.classList.add("btn-atras");
     BtnAtras.type = "button";
     BtnAtras.textContent = "Atrás";
     BtnAtras.addEventListener('click', () => {
         CloseModal();
         CreateModalCarrito(Carrito, ValorTotal);
     });
+    ContainerBtns.appendChild(BtnAtras);
+
+    let BtnSiguiente = $.createElement("button");
+    BtnSiguiente.classList.add("btn-siguiente");
+    BtnSiguiente.type = "submit";
+    BtnSiguiente.textContent = "Siguiente";
+    ContainerBtns.appendChild(BtnSiguiente);
+
+    ContainerForm.appendChild(LabelNombre);
+    ContainerForm.appendChild(InputNombre);
+    ContainerForm.appendChild(LabelEmail);
+    ContainerForm.appendChild(InputEmail);
+    ContainerForm.appendChild(LabelTelefono);
+    ContainerForm.appendChild(InputTelefono);
+    ContainerForm.appendChild(LabelDireccion);
+    ContainerForm.appendChild(InputDireccion);
+    ContainerForm.appendChild(LabelFechaEntrega);
+    ContainerForm.appendChild(InputFechaEntrega);
+    ContainerForm.appendChild(LabelMetodoPago);
+    ContainerForm.appendChild(SelectMetodoPago);
 
     Form.appendChild(H4);
-    Form.appendChild(LabelNombre);
-    Form.appendChild(InputNombre);
-    Form.appendChild(LabelApellido);
-    Form.appendChild(InputApellido);
-    Form.appendChild(LabelEmail);
-    Form.appendChild(InputEmail);
-    Form.appendChild(LabelDireccion);
-    Form.appendChild(InputDireccion);
-    Form.appendChild(BtnSiguiente);
-    Form.appendChild(BtnAtras);
+    Form.appendChild(ContainerForm);
+    Form.appendChild(ContainerBtns);
 
     Modal.appendChild(Form);
 

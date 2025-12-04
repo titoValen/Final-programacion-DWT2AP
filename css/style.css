@@ -274,3 +274,41 @@ section h2 {
     justify-content: space-between;
     align-items: center;
 }
+
+.modal .container-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .container-form :is(input, select) {
+    margin: .5rem 0;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 1px solid #b5b5b5;
+    font-size: 1rem;
+}
+
+.modal form .container-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal form .container-btns button {
+    width: 50%;
+}
+
+.modal form .container-btns .btn-atras {
+    background: #008CBA;
+}
+
+.modal form .container-btns .btn-atras:hover {
+    background: #007bb5;
+}
+
+.modal form .container-btns .btn-siguiente {
+    background: #4CAF50;
+}
+
+.modal form .container-btns .btn-siguiente:hover {
+    background: #45a049;
+}
