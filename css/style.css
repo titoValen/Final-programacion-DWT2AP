@@ -214,12 +214,12 @@ section h2 {
     transition: all .3s;
 }
 
-.modal button#close {
+.modal button#close-ver-mas {
     background: #008CBA;
     width: 100%;
 }
 
-.modal button#close:hover {
+.modal button#close-ver-mas:hover {
     background: #007bb5;
 }
 
@@ -232,11 +232,11 @@ section h2 {
     justify-content: space-between;
 }
 
-.modal .container-btns #close {
+.modal .container-btns #close-carrito {
     background: #008CBA;
 }
 
-.modal .container-btns #close:hover {
+.modal .container-btns #close-carrito:hover {
     background: #007bb5;
 }
 

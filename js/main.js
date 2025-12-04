@@ -211,7 +211,7 @@ function CreateModalVerMas(url, title, cat, pre, des) {
     PDescripcion.textContent = des;
 
     let Btn = $.createElement("button")
-    Btn.id = "close";
+    Btn.id = "close-ver-mas";
     Btn.textContent = "Cerrar"
 
     // Agregar evento al botón de cerrar
@@ -424,7 +424,7 @@ function CreateModalCarrito(carrito, total) {
     ContainerBtns.classList.add("container-btns");
 
     let BtnCerrar = $.createElement("button")
-    BtnCerrar.id = "close";
+    BtnCerrar.id = "close-carrito";
     BtnCerrar.textContent = "Cerrar ventana"
     ContainerBtns.appendChild(BtnCerrar);
 
