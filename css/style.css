@@ -205,8 +205,6 @@ section h2 {
 }
 
 .modal button {
-    width: 100%;
-    background: #df1f1f;
     padding: .5rem;
     border-radius: .5rem;
     font-size: 1rem;
@@ -220,10 +218,40 @@ section h2 {
     background: #b71717;
 }
 
+.modal .container-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal .container-btns #close {
+    background: #008CBA;
+}
+
+.modal .container-btns #close:hover {
+    background: #007bb5;
+}
+
+.modal .container-btns #delete-all {
+    background: #df1f1f;
+}
+
+.modal .container-btns #delete-all:hover {
+    background: #b71717;
+}
+
+.modal .container-btns #buy-now {
+    background: #4CAF50;
+}
+
+.modal .container-btns #buy-now:hover {
+    background: #45a049;
+}
+
 .modal .remover {
     width: 42px;
     height: 42px;
     margin: 0;
+    background: #df1f1f;
 }
 
 .modal ul {

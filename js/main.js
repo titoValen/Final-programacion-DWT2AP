@@ -420,17 +420,31 @@ function CreateModalCarrito(carrito, total) {
     let TotalP = $.createElement("p");
     TotalP.textContent = `Total: $${total}`;
 
-    let Btn = $.createElement("button")
-    Btn.id = "close";
-    Btn.textContent = "Cerrar"
+    let ContainerBtns = $.createElement("div");
+    ContainerBtns.classList.add("container-btns");
+
+    let BtnCerrar = $.createElement("button")
+    BtnCerrar.id = "close";
+    BtnCerrar.textContent = "Cerrar ventana"
+    ContainerBtns.appendChild(BtnCerrar);
+
+    let BtnEliminarTodo = $.createElement("button")
+    BtnEliminarTodo.id = "delete-all";
+    BtnEliminarTodo.textContent = "Eliminar todo"
+    ContainerBtns.appendChild(BtnEliminarTodo);
+
+    let BtnCompra = $.createElement("button")
+    BtnCompra.id = "buy-now";
+    BtnCompra.textContent = "Continuar compra"
+    ContainerBtns.appendChild(BtnCompra);
 
     // Agregar evento al botón de cerrar
-    Btn.addEventListener('click', CloseModal);
+    BtnCerrar.addEventListener('click', CloseModal);
 
     Modal.appendChild(H4);
     Modal.appendChild(Ul);
     Modal.appendChild(TotalP);
-    Modal.appendChild(Btn)
+    Modal.appendChild(ContainerBtns);
 
     ModalContainer.appendChild(Modal);
     $.body.appendChild(ModalContainer);
