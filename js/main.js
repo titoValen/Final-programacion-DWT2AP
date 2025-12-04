@@ -432,6 +432,11 @@ function CreateModalCarrito(carrito, total) {
     BtnEliminarTodo.id = "delete-all";
     BtnEliminarTodo.textContent = "Eliminar todo"
     ContainerBtns.appendChild(BtnEliminarTodo);
+    BtnEliminarTodo.addEventListener('click', () => {
+        EliminarProductosTotal();
+        CloseModal();
+        return;
+    });
 
     let BtnCompra = $.createElement("button")
     BtnCompra.id = "buy-now";
@@ -453,4 +458,9 @@ function CreateModalCarrito(carrito, total) {
     setTimeout(() => {
         ModalContainer.classList.add('show');
     }, 30);
+}
+
+function EliminarProductosTotal() {
+    Carrito.length = 0;
+    ValorTotal = 0;
 }
