@@ -442,6 +442,10 @@ function CreateModalCarrito(carrito, total) {
     BtnCompra.id = "buy-now";
     BtnCompra.textContent = "Continuar compra"
     ContainerBtns.appendChild(BtnCompra);
+    BtnCompra.addEventListener('click', () => {
+        CloseModal();
+        FormDatos();
+    });
 
     // Agregar evento al botón de cerrar
     BtnCerrar.addEventListener('click', CloseModal);
@@ -463,4 +467,82 @@ function CreateModalCarrito(carrito, total) {
 function EliminarProductosTotal() {
     Carrito.length = 0;
     ValorTotal = 0;
+}
+
+function FormDatos() {
+    // Crear contenedor del modal
+    let ModalContainer = $.createElement("div");
+    ModalContainer.classList.add("modal-container");
+    ModalContainer.id = "modal_container";
+
+    // Crear modal
+    let Modal = $.createElement("div");
+    Modal.classList.add("modal");
+
+    let Form = $.createElement("form");
+
+    let H4 = $.createElement("h4");
+    H4.textContent = "Datos de Usuario";
+
+    let LabelNombre = $.createElement("label");
+    LabelNombre.textContent = "Nombre:";
+    let InputNombre = $.createElement("input");
+    InputNombre.type = "text";
+    InputNombre.name = "nombre";
+    InputNombre.required = true;
+
+    let LabelApellido = $.createElement("label");
+    LabelApellido.textContent = "Apellido:";
+    let InputApellido = $.createElement("input");
+    InputApellido.type = "text";
+    InputApellido.name = "apellido";
+    InputApellido.required = true;
+
+    let LabelEmail = $.createElement("label");
+    LabelEmail.textContent = "Email:";
+    let InputEmail = $.createElement("input");
+    InputEmail.type = "email";
+    InputEmail.name = "email";
+    InputEmail.required = true;
+
+    let LabelDireccion = $.createElement("label");
+    LabelDireccion.textContent = "Dirección:";
+    let InputDireccion = $.createElement("input");
+    InputDireccion.type = "text";
+    InputDireccion.name = "direccion";
+    InputDireccion.required = true;
+
+    let BtnSiguiente = $.createElement("button");
+    BtnSiguiente.type = "submit";
+    BtnSiguiente.textContent = "Siguiente";
+
+    let BtnAtras = $.createElement("button");
+    BtnAtras.type = "button";
+    BtnAtras.textContent = "Atrás";
+    BtnAtras.addEventListener('click', () => {
+        CloseModal();
+        CreateModalCarrito(Carrito, ValorTotal);
+    });
+
+    Form.appendChild(H4);
+    Form.appendChild(LabelNombre);
+    Form.appendChild(InputNombre);
+    Form.appendChild(LabelApellido);
+    Form.appendChild(InputApellido);
+    Form.appendChild(LabelEmail);
+    Form.appendChild(InputEmail);
+    Form.appendChild(LabelDireccion);
+    Form.appendChild(InputDireccion);
+    Form.appendChild(BtnSiguiente);
+    Form.appendChild(BtnAtras);
+
+    Modal.appendChild(Form);
+
+    ModalContainer.appendChild(Modal);
+    $.body.appendChild(ModalContainer);
+
+    // Activar animación después de agregar al DOM
+    setTimeout(() => {
+        ModalContainer.classList.add('show');
+    }, 30);
 }
