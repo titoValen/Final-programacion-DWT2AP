@@ -396,6 +396,22 @@ function CreateModalCarrito(carrito, total) {
         RemoveImg.alt = "Remover producto";
         RemoveBtn.appendChild(RemoveImg);
 
+        RemoveBtn.addEventListener('click', (event) => {
+            const itemToRemove = event.target.closest('button').previousSibling.textContent;
+            const itemName = itemToRemove.split(" - $")[0];
+
+            const index = Carrito.findIndex((P) => P.nombre === itemName);
+            if (index !== -1) {
+                ValorTotal -= Carrito[index].precio;
+                Carrito.splice(index, 1);
+            }
+
+            CloseModal();
+            if (Carrito.length > 0) {
+                CreateModalCarrito(Carrito, ValorTotal);
+            }
+        })
+
         Li.appendChild(Info);
         Li.appendChild(RemoveBtn);
         Ul.appendChild(Li);
