@@ -219,3 +219,21 @@ section h2 {
 .modal button:hover {
     background: #b71717;
 }
+
+.modal .remover {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+}
+
+.modal ul {
+    display: grid;
+    gap: .5rem;
+    margin: .5rem 0;
+}
+
+.modal ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

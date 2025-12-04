@@ -386,7 +386,19 @@ function CreateModalCarrito(carrito, total) {
     let Ul = $.createElement("ul");
     carrito.forEach((Prod) => {
         let Li = $.createElement("li");
-        Li.textContent = `${Prod.nombre} - $${Prod.precio}`;
+        let Info = $.createElement("span");
+        Info.classList.add("info-carrito");
+        Info.textContent = `${Prod.nombre} - $${Prod.precio}`;
+
+        let RemoveBtn = $.createElement("button");
+        RemoveBtn.classList.add("remover");
+        let RemoveImg = $.createElement("img");
+        RemoveImg.src = "img/icon/TdesignDeleteFilled.svg";
+        RemoveImg.alt = "Remover producto";
+        RemoveBtn.appendChild(RemoveImg);
+
+        Li.appendChild(Info);
+        Li.appendChild(RemoveBtn);
         Ul.appendChild(Li);
     });
 
