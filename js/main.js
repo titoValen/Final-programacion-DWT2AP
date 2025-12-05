@@ -256,9 +256,65 @@ Categorias.forEach((Cat) => {
     Boton.textContent = Cat;
     Boton.addEventListener("click", () => {
         filtrarProductos(Cat);
+        Banner(Cat);
     });
     FiltrosDiv.appendChild(Boton);
 });
+
+// Banner
+let bannerTimeout = null;
+
+function Banner(cat) {
+    const BannerDiv = $.getElementById("banner-categoria");
+    
+    // Limpiar timeout anterior si existe
+    if (bannerTimeout) {
+        clearTimeout(bannerTimeout);
+        bannerTimeout = null;
+    }
+
+    // Si es "Todas", ocultar el banner
+    if (cat === "Todas") {
+        BannerDiv.classList.remove('show-banner');
+        BannerDiv.innerHTML = '';
+        return;
+    }
+
+    // Limpiar contenido anterior
+    BannerDiv.innerHTML = '';
+
+    // Crear y configurar imagen según categoría
+    let BannerImg = $.createElement("img");
+    
+    switch (cat) {
+        case "Frutas":
+            BannerImg.src = "img/banner/banner_frutas.webp";
+            break;
+        case "Verduras":
+            BannerImg.src = "img/banner/banner_verduras.webp";
+            break;
+        case "Hongos":
+            BannerImg.src = "img/banner/banner_hongos.webp";
+            break;
+        default:
+            return;
+    }
+
+    BannerImg.alt = `Banner de ${cat}`;
+    BannerDiv.appendChild(BannerImg);
+    
+    // Mostrar banner con animación
+    BannerDiv.classList.add('show-banner');
+
+    // Ocultar después de 10 segundos
+    bannerTimeout = setTimeout(() => {
+        BannerDiv.classList.remove('show-banner');
+        setTimeout(() => {
+            BannerDiv.innerHTML = '';
+        }, 300); // Esperar a que termine la animación
+        bannerTimeout = null;
+    }, 10000);
+}
 
 // Funcionamiento de filtrar
 const Cards = $.querySelectorAll(".card")

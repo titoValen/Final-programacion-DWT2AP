@@ -46,6 +46,35 @@ section h2 {
     margin-bottom: .5rem;
 }
 
+#banner-categoria {
+    width: 80%;
+    height: 0;
+    margin: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+
+#banner-categoria.show-banner {
+    height: 350px;
+    margin: 1rem auto;
+}
+
+#banner-categoria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes show-banner {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 #filtro {
     width: fit-content;
     display: flex;
