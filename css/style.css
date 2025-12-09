@@ -87,10 +87,6 @@ section h2 {
     gap: 1rem;
 }
 
-#productos {
-    margin: 0 1rem;
-}
-
 #filtros-categorias button {
     background: #8e8d8d;
     color: #e5e5e5;
