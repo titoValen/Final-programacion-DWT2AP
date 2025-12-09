@@ -486,12 +486,19 @@ function CreateModalCarrito(carrito, total) {
 
         RemoveBtn.addEventListener('click', (event) => {
             const itemToRemove = event.target.closest('button').previousSibling.textContent;
-            const itemName = itemToRemove.split(" - $")[0];
+            // Extraer el nombre del producto (está después de "cantidad x ")
+            const itemParts = itemToRemove.split(" x ");
+            const itemName = itemParts[1].split(" - $")[0];
 
             const index = Carrito.findIndex((P) => P.nombre === itemName);
             if (index !== -1) {
                 ValorTotal -= Carrito[index].precio;
-                Carrito.splice(index, 1);
+                Carrito[index].cantidad -= 1;
+                
+                // Si la cantidad llega a cero, eliminar del carrito
+                if (Carrito[index].cantidad === 0) {
+                    Carrito.splice(index, 1);
+                }
             }
 
             CloseModal();
