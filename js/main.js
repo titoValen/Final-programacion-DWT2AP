@@ -11,6 +11,7 @@ const productos = [
         categoria: "Frutas",
         precio: 100,
         descripcion: "Manzana roja, fresca y crujiente.",
+        cantidad: 0
     },
     {
         id: 2,
@@ -19,6 +20,7 @@ const productos = [
         categoria: "Frutas",
         precio: 80,
         descripcion: "Bananas dulces, ideales para colaciones.",
+        cantidad: 0
     },
     {
         id: 3,
@@ -27,6 +29,7 @@ const productos = [
         categoria: "Frutas",
         precio: 90,
         descripcion: "Naranja jugosa, rica en vitamina C.",
+        cantidad: 0
     },
     {
         id: 4,
@@ -35,6 +38,7 @@ const productos = [
         categoria: "Frutas",
         precio: 110,
         descripcion: "Pera tierna, de sabor suave y dulce.",
+        cantidad: 0
     },
     {
         id: 5,
@@ -43,6 +47,7 @@ const productos = [
         categoria: "Frutas",
         precio: 120,
         descripcion: "Uvas frescas, listas para consumir.",
+        cantidad: 0
     },
     // Verduras
     {
@@ -52,6 +57,7 @@ const productos = [
         categoria: "Verduras",
         precio: 70,
         descripcion: "Lechuga fresca, ideal para ensaladas.",
+        cantidad: 0
     },
     {
         id: 7,
@@ -60,6 +66,7 @@ const productos = [
         categoria: "Verduras",
         precio: 95,
         descripcion: "Tomates rojos, jugosos y sabrosos.",
+        cantidad: 0
     },
     {
         id: 8,
@@ -68,6 +75,7 @@ const productos = [
         categoria: "Verduras",
         precio: 60,
         descripcion: "Zanahorias crocantes, listas para cocinar.",
+        cantidad: 0
     },
     {
         id: 9,
@@ -76,6 +84,7 @@ const productos = [
         categoria: "Verduras",
         precio: 50,
         descripcion: "Cebollas frescas, de sabor intenso.",
+        cantidad: 0
     },
     {
         id: 10,
@@ -84,6 +93,7 @@ const productos = [
         categoria: "Verduras",
         precio: 85,
         descripcion: "Morrón rojo, dulce y aromático.",
+        cantidad: 0
     },
     // Hongos
     {
@@ -93,6 +103,7 @@ const productos = [
         categoria: "Hongos",
         precio: 130,
         descripcion: "Champiñones blancos, suaves y versátiles.",
+        cantidad: 0
     },
     {
         id: 12,
@@ -101,6 +112,7 @@ const productos = [
         categoria: "Hongos",
         precio: 150,
         descripcion: "Portobellos grandes, ideales para grillar.",
+        cantidad: 0
     },
     {
         id: 13,
@@ -109,6 +121,7 @@ const productos = [
         categoria: "Hongos",
         precio: 170,
         descripcion: "Hongos shiitake, de sabor intenso.",
+        cantidad: 0
     },
     {
         id: 14,
@@ -117,6 +130,7 @@ const productos = [
         categoria: "Hongos",
         precio: 140,
         descripcion: "Enoki finos, perfectos para salteados.",
+        cantidad: 0
     },
     {
         id: 15,
@@ -125,6 +139,7 @@ const productos = [
         categoria: "Hongos",
         precio: 160,
         descripcion: "Hongos ostra, carnosos y delicados.",
+        cantidad: 0
     },
 ];
 
@@ -266,7 +281,7 @@ let bannerTimeout = null;
 
 function Banner(cat) {
     const BannerDiv = $.getElementById("banner-categoria");
-    
+
     // Limpiar timeout anterior si existe
     if (bannerTimeout) {
         clearTimeout(bannerTimeout);
@@ -285,7 +300,7 @@ function Banner(cat) {
 
     // Crear y configurar imagen según categoría
     let BannerImg = $.createElement("img");
-    
+
     switch (cat) {
         case "Frutas":
             BannerImg.src = "img/banner/banner_frutas.webp";
@@ -302,7 +317,7 @@ function Banner(cat) {
 
     BannerImg.alt = `Banner de ${cat}`;
     BannerDiv.appendChild(BannerImg);
-    
+
     // Mostrar banner con animación
     BannerDiv.classList.add('show-banner');
 
@@ -351,9 +366,26 @@ TotalBtnAñadir.forEach((Btn) => {
         const NombreCard = PadreCard.querySelector("h3").textContent;
         const ProductoCard = productos.find((P) => P.nombre === NombreCard);
 
-        Carrito.push(ProductoCard);
+        // Revisar si el producto ya está en el carrito
+        if (Carrito.length > 0) {
+            const ProductoExistente = Carrito.find((P) => P.id === ProductoCard.id);
+            if (ProductoExistente) {
+                ProductoExistente.cantidad += 1;
+            } else {
+                Carrito.push(ProductoCard);
+                ProductoCard.cantidad += 1;
+            }
+        }
+
+        // Si el carrito está vacío, agregar el primer producto
+        if (Carrito.length === 0) {
+            Carrito.push(ProductoCard);
+            ProductoCard.cantidad += 1;
+        }
+
         ToastrInfo(ProductoCard);
 
+        // Actualizar valor total
         ValorTotal += ProductoCard.precio;
     })
 })
@@ -443,7 +475,7 @@ function CreateModalCarrito(carrito, total) {
         let Li = $.createElement("li");
         let Info = $.createElement("span");
         Info.classList.add("info-carrito");
-        Info.textContent = `${Prod.nombre} - $${Prod.precio}`;
+        Info.textContent = `${Prod.cantidad} x ${Prod.nombre} - $${Prod.precio}`;
 
         let RemoveBtn = $.createElement("button");
         RemoveBtn.classList.add("remover");
